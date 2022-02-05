@@ -1,0 +1,28 @@
+version: "3"
+services:
+  database:
+    environment:
+      - POSTGRES_USER=hedgedoc
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=hedgedoc
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - database:/var/lib/postgresql/data
+      - ./backups:/var/lib/postgresql/backups
+  app:
+    # Make sure to use the latest release from https://hedgedoc.org/latest-release
+    image: quay.io/hedgedoc/hedgedoc:1.9.2
+    environment:
+      - CMD_DB_URL=postgres://hedgedoc:password@database:5432/hedgedoc
+      - CMD_DOMAIN=localhost
+      - CMD_URL_ADDPORT=true
+    volumes:
+      - ./uploads:/hedgedoc/public/uploads
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+volumes:
+  database:

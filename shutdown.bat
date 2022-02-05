@@ -1,0 +1,1 @@
+pwsh shutdown.ps1
