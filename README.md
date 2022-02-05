@@ -2,7 +2,7 @@
 [HedgeDoc Github](https://github.com/hedgedoc/hedgedoc)
 
 ## About
-This collection of scripts starts HedgeDoc on Docker and uses cron to output a backup dump every 15 minutes.
+This collection of scripts lanches HedgeDoc on Docker and outputs a backup dump every 15 minutes using cronjob.
 By automatically loading this backup dump when you start HedgeDoc, you can open your notes in the most recent state.
 
 You can edit the same HedgeDoc documents on different devices by sharing the entire folder to Google Drive, etc.
