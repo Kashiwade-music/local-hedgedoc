@@ -5,6 +5,7 @@ if($(docker volume ls -q -f name="hedgedoc_database")){
 } else {
     Write-Output not exist volume
     docker-compose up -d database
+    Start-Sleep -s 2
     (Get-ChildItem .\backups\ | Sort-Object -Descending)[0].Name
     docker exec -i $(docker-compose ps -q database) pg_restore -d hedgedoc -U hedgedoc /var/lib/postgresql/backups/$((Get-ChildItem .\backups\ | Sort-Object -Descending)[0].Name)
 }
